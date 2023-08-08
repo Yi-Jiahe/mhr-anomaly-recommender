@@ -422,6 +422,7 @@ function App() {
   const materials: string[] = Array.from(new Set(targetedUpgrades.reduce((acc: string[], e: string) => {
     const match = /(.*) Lv.(\d+)/.exec(e);
     if (match === null) { return acc; }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [_, key, i, ..._rest] = match
     return [...acc, ...WeaponAugmentations[key][parseInt(i) - 1]['Materials'].map((e: [string, number]) => e[0])]
   }, [])));
