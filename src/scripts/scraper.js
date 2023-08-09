@@ -59,7 +59,7 @@ const getWeaponAugments = async (page) => {
                 // Separate quantity required
                 .map(e => {
                     const match = /(.*) x([\d+]$)/.exec(e);
-                    if (match === null) { return e; }
+                    if (match === null) { return [e, 1]; }
                     const [_, material, quantity, ..._rest] = match;
                     return [material, parseInt(quantity)]
                 })

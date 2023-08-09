@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import weaponAugments from './data/augments.json'
 
 const TypeToMonster: { [key: string]: string[] } = {
   "Bone": [
@@ -352,79 +353,15 @@ const AfflictedMaterials: { [key: string]: any } = {
   },
 }
 
-// Assuming 
-const WeaponAugmentations: { [key: string]: any } = {
-  "Anomaly Slot": [
-    {
-      "Materials": [
-        ["Afflicted Dragon Blood", 2],
-        ["Afflicted Shell", 2],
-      ],
-      "Afflicted Material Points": 30,
-      "Required Funds": 5000
-    },
-    {
-      "Materials": [
-        ["Afflicted Dire Scale", 3]
-      ],
-      "Afflicted Material Points": 50,
-      "Required Funds": 10000
-    },
-    {
-      "Materials": [
-        ["Afflicted Dire Claw+", 2],
-        ["Afflicted Shard", 2],
-        ["Afflicted Hardfang", 2],
-      ],
-      "Afflicted Material Points": 100,
-      "Required Funds": 10000
-    },
-    {
-      "Materials": [
-        ["Afflicted Dire Hardhorn", 2],
-        ["Afflicted Dire Wing+", 2],
-      ],
-      "Afflicted Material Points": 150,
-      "Required Funds": 15000
-    },
-    {
-      "Materials": [
-        ["Afflicted Dire Cortex", 2],
-        ["Afflicted Dire Slogbone", 2],
-        ["Afflicted Dragon Blood", 2],
-      ],
-      "Afflicted Material Points": 200,
-      "Required Funds": 20000
-    },
-    {
-      "Materials": [
-        ["Afflicted Dire Hardfang", 2],
-        ["Risen Dragonbone", 2],
-      ],
-      "Afflicted Material Points": 250,
-      "Required Funds": 25000
-    },
-    {
-      "Materials": [
-        ["Risen Dragon Thickblood", 2],
-        ["Risen Slogbone", 2],
-      ],
-      "Afflicted Material Points": 300,
-      "Required Funds": 30000
-    },
-  ],
-  "Attack Boost": []
-}
+const weaponAugmentsMap: Map<string, [string, number][]> = new Map(weaponAugments as []);
 
 function App() {
   const [targetedUpgrades, setTargetedUpgrades] = useState<string[]>([]);
 
   const materials: string[] = Array.from(new Set(targetedUpgrades.reduce((acc: string[], e: string) => {
-    const match = /(.*) Lv.(\d+)/.exec(e);
-    if (match === null) { return acc; }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [_, key, i, ..._rest] = match
-    return [...acc, ...WeaponAugmentations[key][parseInt(i) - 1]['Materials'].map((e: [string, number]) => e[0])]
+    const materials = weaponAugmentsMap.get(e)
+    if (materials === undefined) return acc;
+    return [...acc, ...materials.map(e => e[0])]
   }, [])));
 
   const monsters: [string, [number, number]][] = Array.from(new Set(materials.reduce((acc: [string, [number, number]][], e: string) => {
@@ -437,46 +374,45 @@ function App() {
 
   return (
     <div className="App">
-      <div className='grid-container'>
-        <div className='grid-item'>
-          {Object.keys(WeaponAugmentations).map((key: string) => {
-            return <ul key={`${key}`}>{WeaponAugmentations[key].map((_: any, i: number) => {
-              const upgrade = `${key} Lv.${i + 1}`
-              return <li key={upgrade}>
-                <input
-                  type='checkbox'
-                  key={`${upgrade} input`}
-                  onChange={(e) => {
-                    setTargetedUpgrades(targetedUpgrades => {
-                      if (e.target.checked) {
-                        return Array.from(new Set([...targetedUpgrades, upgrade]));
-                      } else {
-                        const targetedUpgradesSet = new Set(targetedUpgrades);
-                        targetedUpgradesSet.delete(upgrade);
-                        return Array.from(targetedUpgradesSet)
-                      }
-                    })
-                  }} />
-                <label key={`${upgrade} label`}>{upgrade}</label>
-              </li>;
-            })}
-            </ul>;
+      <div>
+        <div>
+          {Array.from(weaponAugmentsMap).map(e => {
+            const key = e[0];
+            return <li key={key}>
+              <input
+                type='checkbox'
+                key={`${key} input`}
+                onChange={(e) => {
+                  setTargetedUpgrades(targetedUpgrades => {
+                    if (e.target.checked) {
+                      return Array.from(new Set([...targetedUpgrades, key]));
+                    } else {
+                      const targetedUpgradesSet = new Set(targetedUpgrades);
+                      targetedUpgradesSet.delete(key);
+                      return Array.from(targetedUpgradesSet)
+                    }
+                  })
+                }} />
+              <label key={`${key} label`}>{key}</label>
+            </li>
           })}
         </div>
-        <div className='grid-item'>
-          {targetedUpgrades.map((e) => <p key={e}>{e}</p>)}
+        <div>
+          <ul>
+            {targetedUpgrades.map((e) => <li key={e}>{e}</li>)}
+          </ul>
         </div>
-        <div className='grid-item'>
+        <div>
           {
             <ul>{materials.map(e => <li key={e}>{e}</li>)}</ul>
           }
         </div>
-        <div className='grid-item'>
+        <div>
           {
-           monsters.map((e: [string, [number, number]]) => {
-            const monster = `${e[0]} ${e[1][0]}-${e[1][1]}`
-            return <li key={monster}>{monster}</li>
-           })
+            monsters.map((e: [string, [number, number]]) => {
+              const monster = `${e[0]} ${e[1][0]}-${e[1][1]}`
+              return <li key={monster}>{monster}</li>
+            })
           }
         </div>
       </div>
