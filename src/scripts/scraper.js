@@ -41,35 +41,37 @@ const getAfflictedMaterials = async (page) => {
 }
 
 const getWeaponAugments = async (page) => {
-    await page.goto('https://monsterhunter.fandom.com/wiki/MHRS:_Qurious_Crafting');
+    await page.goto('https://monsterhunterrise.wiki.fextralife.com/Qurious+Weapon+Crafting');
 
-    // First table is the table of augments and upgrade materials
-    const augments = (await page.$eval('table', node => {
-        const rows = Array.from(node.querySelectorAll('tr').values());
+    const tableHandles = await page.$$('.wiki_table');
+    // Discard first table of materials to monsters
+    // Tables are reversed for some reason
+    tableHandles.pop(0);
 
-        // Discard header row
-        return rows.slice(0, rows.length - 1).map(e => {
-            const [augmentCol, materialsCol, ..._rest] = e.querySelectorAll('td');
 
-            if (materialsCol === undefined) { return; }
-            const materials = materialsCol.innerText
-                // Remove afflicted material point cost
-                .split('\n')
-                .slice(0, -1)
-                // Separate quantity required
+
+    // First table has only 3 columns
+    const augmentNames = ["Anomaly Slot", "Attack Boost", "Affinity Boost", "Shelling Level Boost", "Elemental Boost", "Rampage Boost", "Sharpness Boost", "Status Effect Boost"];
+    const augments = await Promise.all(tableHandles.map((e, i) => e.evaluate((n, augment) => {
+        return Array.from(n.querySelectorAll('tr')).map((e, i) => {
+            // Discard header
+            if (i === 0) { return null; }
+
+            const materials = Array.from(e.querySelectorAll('li'))
                 .map(e => {
-                    const match = /(.*) x([\d+]$)/.exec(e);
-                    if (match === null) { return [e, 1]; }
-                    const [_, material, quantity, ..._rest] = match;
-                    return [material, parseInt(quantity)]
+                    const a = e.querySelector('a');
+                    if (a === null) return;
+
+                    return material = a.innerText
+                        // Remove space before final +
+                        .replace(/ \+$/, '+');
                 })
-            // Discard points cost
-            return [augmentCol.innerText, materials];
-        })
+                .filter(e => !!e);
 
-    }))
-        .filter(e => e !== null);
+            return [`${augment} Lv.${i}`, materials];
+        }).filter(e => e !== null);
+    }, augmentNames[i])));
 
-    console.log(augments);
+    console.log(JSON.stringify(augments));
     fs.writeFile("src/data/augments.json", JSON.stringify(augments), (err) => { if (err) { console.log(err) } })
 }

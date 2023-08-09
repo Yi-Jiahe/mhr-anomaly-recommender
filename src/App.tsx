@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
-import weaponAugments from './data/augments.json'
+import weaponAugments from './data/augments.json';
+import largeMonsters from './data/large_monsters.json';
 
 const TypeToMonster: { [key: string]: string[] } = {
   "Bone": [
@@ -353,15 +354,22 @@ const AfflictedMaterials: { [key: string]: any } = {
   },
 }
 
-const weaponAugmentsMap: Map<string, [string, number][]> = new Map(weaponAugments as []);
+const largeMonstersList = largeMonsters as [];
+const weaponAugmentsUnpacked: [string, string[]][] = [];
+(weaponAugments as [[string, string[]]][]).forEach(e => e.forEach(e => weaponAugmentsUnpacked.push(e)));
+const weaponAugmentsMap: Map<string, string[]> = new Map((weaponAugmentsUnpacked as []));
+console.log(weaponAugmentsMap);
 
 function App() {
+  const maxPages = 2;
+  const [page, setPage] = useState(0);
   const [targetedUpgrades, setTargetedUpgrades] = useState<string[]>([]);
+  const [chosenMonster, setChosenMonster] = useState<string>();
 
   const materials: string[] = Array.from(new Set(targetedUpgrades.reduce((acc: string[], e: string) => {
     const materials = weaponAugmentsMap.get(e)
     if (materials === undefined) return acc;
-    return [...acc, ...materials.map(e => e[0])]
+    return [...acc, ...materials]
   }, [])));
 
   const monsters: [string, [number, number]][] = Array.from(new Set(materials.reduce((acc: [string, [number, number]][], e: string) => {
@@ -374,47 +382,70 @@ function App() {
 
   return (
     <div className="App">
+      {page > 0 && <button onClick={() => { if (page > 0) { setPage(page - 1) } }}>{"<"}</button>}
+      {page < maxPages && <button onClick={() => { if (page < maxPages) { setPage(page + 1) } }}>{">"}</button>}
       <div>
-        <div>
-          {Array.from(weaponAugmentsMap).map(e => {
-            const key = e[0];
-            return <li key={key}>
-              <input
-                type='checkbox'
-                key={`${key} input`}
-                onChange={(e) => {
-                  setTargetedUpgrades(targetedUpgrades => {
-                    if (e.target.checked) {
-                      return Array.from(new Set([...targetedUpgrades, key]));
-                    } else {
-                      const targetedUpgradesSet = new Set(targetedUpgrades);
-                      targetedUpgradesSet.delete(key);
-                      return Array.from(targetedUpgradesSet)
-                    }
-                  })
-                }} />
-              <label key={`${key} label`}>{key}</label>
-            </li>
-          })}
-        </div>
-        <div>
-          <ul>
-            {targetedUpgrades.map((e) => <li key={e}>{e}</li>)}
-          </ul>
-        </div>
-        <div>
-          {
-            <ul>{materials.map(e => <li key={e}>{e}</li>)}</ul>
-          }
-        </div>
-        <div>
-          {
-            monsters.map((e: [string, [number, number]]) => {
-              const monster = `${e[0]} ${e[1][0]}-${e[1][1]}`
-              return <li key={monster}>{monster}</li>
-            })
-          }
-        </div>
+        {page === 0 &&
+          <div>
+            {Array.from(weaponAugmentsMap).map(e => {
+              const key = e[0];
+              return <li key={key}>
+                <input
+                  key={`${key} input`}
+                  type='checkbox'
+                  checked={new Set(targetedUpgrades).has(key)}
+                  onChange={(e) => {
+                    setTargetedUpgrades(targetedUpgrades => {
+                      if (e.target.checked) {
+                        return Array.from(new Set([...targetedUpgrades, key]));
+                      } else {
+                        const targetedUpgradesSet = new Set(targetedUpgrades);
+                        targetedUpgradesSet.delete(key);
+                        return Array.from(targetedUpgradesSet)
+                      }
+                    })
+                  }} />
+                <label key={`${key} label`}>{key}</label>
+              </li>
+            })}
+          </div>}
+        {page === 1 &&
+          <div>
+            <h1>Targeted Upgrades</h1>
+            <div>
+              <ul>
+                {targetedUpgrades.map((e) => <li key={e}>{e}</li>)}
+              </ul>
+            </div>
+            <h1>Materials Required</h1>
+            <div>
+              {
+                <ul>{materials.map(e => <li key={e}>{e}</li>)}</ul>
+              }
+            </div>
+          </div>
+        }
+        {
+          page === 2 &&
+          <div>
+            {
+              monsters.map((e: [string, [number, number]]) => {
+                const monster = `${e[0]} ${e[1][0]}-${e[1][1]}`
+                return <li key={monster}>{monster}</li>
+              })
+            }
+            <button onClick={() => {
+              if (monsters.length === 0) {
+                setChosenMonster(largeMonstersList[Math.floor(Math.random() * largeMonstersList.length)])
+                return;
+              }
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              const [monster, _level_range] = monsters[Math.floor(Math.random() * monsters.length)]
+              setChosenMonster(monster)
+            }}>Next hunt</button>
+            <h1>{chosenMonster}</h1>
+          </div>
+        }
       </div>
     </div>
   );
