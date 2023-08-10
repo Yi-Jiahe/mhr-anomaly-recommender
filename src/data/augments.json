@@ -1,1 +1,253 @@
-[[["Anomaly Slot Lv.1",["Afflicted Dragon Blood","Afflicted Shell"]],["Anomaly Slot Lv.2",["Afflicted Dire Scale"]],["Anomaly Slot Lv.3",["Afflicted Dire Claw+","Afflicted Shard","Afflicted Hardfang"]],["Anomaly Slot Lv.4",["Afflicted Dire Hardhorn","Afflicted Dire Wing+"]],["Anomaly Slot Lv.5",["Afflicted Dire Cortex","Afflicted Dire Slogbone","Afflicted Dire Dragon Blood"]],["Anomaly Slot Lv.6",["Afflicted Dire Hardfang","Risen Dragonbone"]],["Anomaly Slot Lv.7",["Risen Dragon Thickblood","Risen Slogbone"]]],[["Attack Boost Lv.1",["Afflicted Pelt"]],["Attack Boost Lv.2",["Afflicted Fang+","Afflicted Fang"]],["Attack Boost Lv.3",["Afflicted Dire Hore+","Afflicted Thickhide","Afflicted Dire Shell"]],["Attack Boost Lv.4",["Afflicted Dire Fang+","Afflicted Dire Blood"]]],[["Affinity Boost Lv.1",["Afflicted Hide+","Afflicted Monster Bone"]],["Affinity Boost Lv.2",["Afflicted Dire Fang","Afflicted Dire Wing"]],["Affinity Boost Lv.3",["Risen Dragonbone"]]],[["Shelling Level Boost Lv.1",["Afflicted Dire Fang+","Afflicted Dire Dragon Blood"]],["Shelling Level Boost Lv.2",["Afflicted Dire Cortex","Afflicted Dire Hardclaw"]]],[["Elemental Boost Lv.1",["Afflicted Bone"]],["Elemental Boost Lv.2",["Afflicted Monster Hardbone","Afflicted Scale"]],["Elemental Boost Lv.3",["Afflicted Dire Horn","Afflicted Claw","Afflicted Carapace"]],["Elemental Boost Lv.4",["Afflicted Slogbone","Afflicted Pure Blood","Afflicted Cortex"]],["Elemental Boost Lv.5",["Afflicted Dire Carapace","Afflicted Dire Scale+","Afflicted Hardclaw"]],["Elemental Boost Lv.6",["Afflicted Dire Slogbone"]],["Elemental Boost Lv.7",["Risen Dragonbone+"]],["Elemental Boost Lv.8",["Risen Dragon Pureblood"]]],[["Rampage Boost Lv.1",["Afflicted Dire Bone"]],["Rampage Boost Lv.2",["Afflicted Dire Darkblood","Risen Dragonbone+"]]],[["Sharpness Boost Lv.1",["Afflicted Claw+","Afflicted Scale+"]],["Sharpness Boost Lv.2",["Afflicted Dire Hardclaw","Afflicted Dire Shard"]],["Sharpness Boost Lv.3",["Afflicted Dire Fellwing","Risen Dragonbone"]],["Sharpness Boost Lv.4",["Risen Dragon Pureblood","Risen Slogbone"]]],[["Status Effect Boost Lv.1",["Afflicted Hardbone","Afflicted Blood"]],["Status Effect Boost Lv.2",["Afflicted Dire Hardbone","Afflicted Monster Slogbone","Afflicted Dire Claw"]],["Status Effect Boost Lv.3",["Risen Dragonbone"]],["Status Effect Boost Lv.4",["Risen Dragonblood"]]]]
+[
+    [
+        [
+            "Anomaly Slot Lv.1",
+            [
+                "Afflicted Dragon Blood",
+                "Afflicted Shell"
+            ]
+        ],
+        [
+            "Anomaly Slot Lv.2",
+            [
+                "Afflicted Dire Scale"
+            ]
+        ],
+        [
+            "Anomaly Slot Lv.3",
+            [
+                "Afflicted Dire Claw+",
+                "Afflicted Shard",
+                "Afflicted Hardfang"
+            ]
+        ],
+        [
+            "Anomaly Slot Lv.4",
+            [
+                "Afflicted Dire Hardhorn",
+                "Afflicted Dire Wing+"
+            ]
+        ],
+        [
+            "Anomaly Slot Lv.5",
+            [
+                "Afflicted Dire Cortex",
+                "Afflicted Dire Slogbone",
+                "Afflicted Dire Dragon Blood"
+            ]
+        ],
+        [
+            "Anomaly Slot Lv.6",
+            [
+                "Afflicted Dire Hardfang",
+                "Risen Dragonbone"
+            ]
+        ],
+        [
+            "Anomaly Slot Lv.7",
+            [
+                "Risen Dragon Thickblood",
+                "Risen Slogbone"
+            ]
+        ]
+    ],
+    [
+        [
+            "Attack Boost Lv.1",
+            [
+                "Afflicted Pelt"
+            ]
+        ],
+        [
+            "Attack Boost Lv.2",
+            [
+                "Afflicted Fang+",
+                "Afflicted Fang"
+            ]
+        ],
+        [
+            "Attack Boost Lv.3",
+            [
+                "Afflicted Dire Horn+",
+                "Afflicted Thickhide",
+                "Afflicted Dire Shell"
+            ]
+        ],
+        [
+            "Attack Boost Lv.4",
+            [
+                "Afflicted Dire Fang+",
+                "Afflicted Dire Blood"
+            ]
+        ]
+    ],
+    [
+        [
+            "Affinity Boost Lv.1",
+            [
+                "Afflicted Hide+",
+                "Afflicted Monster Bone"
+            ]
+        ],
+        [
+            "Affinity Boost Lv.2",
+            [
+                "Afflicted Dire Fang",
+                "Afflicted Dire Wing"
+            ]
+        ],
+        [
+            "Affinity Boost Lv.3",
+            [
+                "Risen Dragonbone"
+            ]
+        ]
+    ],
+    [
+        [
+            "Shelling Level Boost Lv.1",
+            [
+                "Afflicted Dire Fang+",
+                "Afflicted Dire Dragon Blood"
+            ]
+        ],
+        [
+            "Shelling Level Boost Lv.2",
+            [
+                "Afflicted Dire Cortex",
+                "Afflicted Dire Hardclaw"
+            ]
+        ]
+    ],
+    [
+        [
+            "Elemental Boost Lv.1",
+            [
+                "Afflicted Bone"
+            ]
+        ],
+        [
+            "Elemental Boost Lv.2",
+            [
+                "Afflicted Monster Hardbone",
+                "Afflicted Scale"
+            ]
+        ],
+        [
+            "Elemental Boost Lv.3",
+            [
+                "Afflicted Dire Horn",
+                "Afflicted Claw",
+                "Afflicted Carapace"
+            ]
+        ],
+        [
+            "Elemental Boost Lv.4",
+            [
+                "Afflicted Slogbone",
+                "Afflicted Pure Blood",
+                "Afflicted Cortex"
+            ]
+        ],
+        [
+            "Elemental Boost Lv.5",
+            [
+                "Afflicted Dire Carapace",
+                "Afflicted Dire Scale+",
+                "Afflicted Hardclaw"
+            ]
+        ],
+        [
+            "Elemental Boost Lv.6",
+            [
+                "Afflicted Dire Slogbone"
+            ]
+        ],
+        [
+            "Elemental Boost Lv.7",
+            [
+                "Risen Dragonbone+"
+            ]
+        ],
+        [
+            "Elemental Boost Lv.8",
+            [
+                "Risen Dragon Pureblood"
+            ]
+        ]
+    ],
+    [
+        [
+            "Rampage Boost Lv.1",
+            [
+                "Afflicted Dire Bone"
+            ]
+        ],
+        [
+            "Rampage Boost Lv.2",
+            [
+                "Afflicted Dire Darkblood",
+                "Risen Dragonbone+"
+            ]
+        ]
+    ],
+    [
+        [
+            "Sharpness Boost Lv.1",
+            [
+                "Afflicted Claw+",
+                "Afflicted Scale+"
+            ]
+        ],
+        [
+            "Sharpness Boost Lv.2",
+            [
+                "Afflicted Dire Hardclaw",
+                "Afflicted Dire Shard"
+            ]
+        ],
+        [
+            "Sharpness Boost Lv.3",
+            [
+                "Afflicted Dire Fellwing",
+                "Risen Dragonbone"
+            ]
+        ],
+        [
+            "Sharpness Boost Lv.4",
+            [
+                "Risen Dragon Pureblood",
+                "Risen Slogbone"
+            ]
+        ]
+    ],
+    [
+        [
+            "Status Effect Boost Lv.1",
+            [
+                "Afflicted Hardbone",
+                "Afflicted Blood"
+            ]
+        ],
+        [
+            "Status Effect Boost Lv.2",
+            [
+                "Afflicted Dire Hardbone",
+                "Afflicted Monster Slogbone",
+                "Afflicted Dire Claw"
+            ]
+        ],
+        [
+            "Status Effect Boost Lv.3",
+            [
+                "Risen Dragonbone"
+            ]
+        ],
+        [
+            "Status Effect Boost Lv.4",
+            [
+                "Risen Dragon Blood"
+            ]
+        ]
+    ]
+]
