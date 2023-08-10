@@ -358,7 +358,6 @@ const largeMonstersList = largeMonsters as [];
 const weaponAugmentsUnpacked: [string, string[]][] = [];
 (weaponAugments as [[string, string[]]][]).forEach(e => e.forEach(e => weaponAugmentsUnpacked.push(e)));
 const weaponAugmentsMap: Map<string, string[]> = new Map((weaponAugmentsUnpacked as []));
-console.log(weaponAugmentsMap);
 
 function App() {
   const maxPages = 2;
@@ -451,4 +450,4 @@ function App() {
   );
 }
 
-export default App;
+export { App as default, AfflictedMaterials};
